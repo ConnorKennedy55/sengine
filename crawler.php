@@ -2,14 +2,8 @@
 // This is our starting point. Change this to whatever URL you want.
 $start = "https://en.wikipedia.org/wiki/Laptop";
 
-try {
     $pdo = new PDO("sqlsrv:server = tcp:40179436dbserver.database.windows.net,1433; Database = searchEngine", "dbmanager40179436", "ySLH33CI8");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch (PDOException $e) {
-    print("Error connecting to SQL Server.");
-    die(print_r($e));
-}
 
 // Our 2 global arrays containing our links to be crawled.
 $already_crawled = array();

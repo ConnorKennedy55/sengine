@@ -20,7 +20,7 @@ foreach ($searche as $term) {
 	$params["search$x"] = $term;
 }
 
-$results = $pdo->prepare("SELECT * FROM 'advert' WHERE $construct");
+$results = $pdo->prepare("SELECT * FROM 'searchEngine' WHERE $construct");
 $results->execute($params);
 
 

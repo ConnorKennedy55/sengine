@@ -93,20 +93,20 @@ function follow_links($url) {
 
             echo md5($details->URL);
             //2.print_r($details)."\n";
-            $rows = $pdo->query("SELECT * FROM `index` WHERE url_hash='".md5($details->URL)."'");
+            $rows = $pdo->query("SELECT * FROM `searchEngine` WHERE url_hash='".md5($details->URL)."'");
             $rows = $rows->fetchColumn();
 
             $params = array(':title' => $details->Title,':description' => $details->Description, ':keywords' => $details->Keywords, ':url' => $details->URL, ':url_hash' => md5($details->URL));
             
             if ($rows > 0) {
                 if (!is_null($params[':title']) && !is_null($params[':description']) && !$params[':title'] != '') {
-                    $result = $pdo->prepare("UPDATE `index` SET title=:title, description=:description, keywords=:keywords, url=:url, url_hash=:url_hash WHERE url_hash=:url_hash");
+                    $result = $pdo->prepare("UPDATE searchEngine SET title=:title, description=:description, keywords=:keywords, url=:url, url_hash=:url_hash WHERE url_hash=:url_hash");
                     $result = $pdo->execute($params);
             }
                 else {
 
                     if (!is_null($params[':title']) && !is_null($params[':description']) && !$params[':title'] != '') {
-                    $result = $pdo->prepare("INSERT INTO `index` VALUES ('', :title, :description, :keywords, :url, :url_hash)");
+                    $result = $pdo->prepare("INSERT INTO searchEngine VALUES ('', :title, :description, :keywords, :url, :url_hash)");
                     $result = $pdo->execute($params);
                     
                     }
